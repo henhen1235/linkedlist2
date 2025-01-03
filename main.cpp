@@ -19,6 +19,7 @@ void addS(Node* &headNode);//prepare the functions
 void printS(Node* headNode);
 void deleteS(Node* &headNode);
 void checknext(Node* &tempnode, int nid, Node* currentnode);
+void deleter(Node* tempnode,int id);
 
 int main(){
     Node* headNode = nullptr;
@@ -83,16 +84,13 @@ int main(){
         Node* newnode = new Node(newStudent);
         
         if (headNode == nullptr){//set as head if head doens't exist
-            cout << "adding as headnode" << endl;
             headNode = newnode;
         }
         else if(headNode->getStudent()->getID() > id){
-            cout << "adding as new head node" << endl;
             newnode->setNext(headNode);
             headNode = newnode;
         }
         else{
-            cout << "Scanning nodes" << endl;
             checknext(headNode, id, newnode);
         }
         cout << "Student has been added!" << endl;
@@ -102,7 +100,6 @@ int main(){
         if(headNode == nullptr){
             return;
         }
-        headNode = headNode->getNext();
         cout << "Info:" << headNode->getStudent()->getfirst() 
             << " " << headNode->getStudent()->getlast() << ", " 
             << headNode->getStudent()->getID() << ", " 
@@ -112,9 +109,27 @@ int main(){
     }
     
     void deleteS(Node* &headNode) {//function for deleting students
-        
+        cout << "What Id would you like to delete?";
+        int id;
+        cin >> id;
+        if(headNode->getStudent()->getID() == id){
+            Node* nextNode = headNode->getNext();
+            delete headNode;
+            headNode = nextNode;
+        }
+        deleter(headNode, id);
     }
 
+    void deleter(Node* tempnode, int nid){
+        if(tempnode->getNext()->getStudent()->getID() != nid){
+            deleter(tempnode->getNext(), nid);
+        }
+        else{
+            Node* badnode = tempnode->getNext();
+            tempnode->setNext(badnode->getNext());
+            delete badnode;
+        }
+    }
     void checknext(Node* &tempnode, int nid, Node* newnode){
         Node* tempnode2 = tempnode->getNext();
         if(tempnode2 == nullptr){
@@ -122,7 +137,6 @@ int main(){
             return;
         }
         if(tempnode2->getStudent()->getID() < nid){
-            cout << "+1" << endl;
             checknext(tempnode2, nid, newnode);
         }
         else{
