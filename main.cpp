@@ -99,19 +99,16 @@ int main(){
     }
 
     void printS(Node* headNode){//function for printing students
+        if(headNode == nullptr){
+            return;
+        }
+        headNode = headNode->getNext();
         cout << "Info:" << headNode->getStudent()->getfirst() 
-        << " " << headNode->getStudent()->getlast() << ", " 
-        << headNode->getStudent()->getID() << ", " 
-        << fixed << setprecision(2)
-        << headNode->getStudent()->getGPA() << endl;
-        while(headNode->getNext() != nullptr){
-            headNode = headNode->getNext();
-            cout << "Info:" << headNode->getStudent()->getfirst() 
             << " " << headNode->getStudent()->getlast() << ", " 
             << headNode->getStudent()->getID() << ", " 
             << fixed << setprecision(2)
             << headNode->getStudent()->getGPA() << endl;
-        }   
+        printS(headNode->getNext()); 
     }
     
     void deleteS(Node* &headNode) {//function for deleting students
