@@ -11,11 +11,12 @@ Additionally I will be refrencing my own code from studentlist and both student.
 #include "student.h"
 #include "node.h"
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
 void addS(Node* &headNode);//prepare the functions
-void printS(Node* &headNode);
+void printS(Node* headNode);
 void deleteS(Node* &headNode);
 void checknext(Node* &tempnode, int nid, Node* currentnode);
 
@@ -97,34 +98,24 @@ void addS(Node* &headNode){//adding a new student function
         cout << "Student has been added!" << endl;
     }
 
-    void printS(Node* &headNode){//function for printing students
-        // int count = 1;
-        // for(Student* currentstudent: studentslist){ //for each student
-        //     float gpa = currentstudent->gpa;
-        //     float roundedgpa = round(gpa*100)/100;//round their GPA and print out their basic info
-        //     cout << "Student " << count << " "<< currentstudent->firstName << " " << currentstudent->lastName << endl;
-        //     cout << "GPA:" << fixed << setprecision(2) << currentstudent->gpa << " Student ID:" << currentstudent->studentID << endl;
-        //     count++;
-        // }
+    void printS(Node* headNode){//function for printing students
+        cout << "Info:" << headNode->getStudent()->getfirst() 
+        << " " << headNode->getStudent()->getlast() << ", " 
+        << headNode->getStudent()->getID() << ", " 
+        << fixed << setprecision(2)
+        << headNode->getStudent()->getGPA() << endl;
+        while(headNode->getNext() != nullptr){
+            headNode = headNode->getNext();
+            cout << "Info:" << headNode->getStudent()->getfirst() 
+            << " " << headNode->getStudent()->getlast() << ", " 
+            << headNode->getStudent()->getID() << ", " 
+            << fixed << setprecision(2)
+            << headNode->getStudent()->getGPA() << endl;
+        }   
     }
     void deleteS(Node* &headNode) {//function for deleting students
-        cout << "hi3";
-
-    //     int del;
-    //     std::cout << "Which student would you like to delete? Print out their ID: ";
-    //     std::cin >> del;//find their ID and save it.
         
-    //     for (auto it = studentslist.begin(); it != studentslist.end(); it++) {//go through the list of students
-    //         if ((*it)->studentID == del) {//when you find their id
-    //             delete *it;//delete it from the heap
-    //             studentslist.erase(it);//delete it from the vector
-    //             cout << "Student# " << del << " has been deleted." << endl;
-    //             return;
-    //         }
-    //     }
-    //     cout << "This student doesn't exist" << endl;//if the id doesn't exist then print it out.
-    // }
-}
+    }
 
 
 void checknext(Node* &tempnode, int nid, Node* newnode){
