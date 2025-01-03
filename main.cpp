@@ -63,7 +63,7 @@ int main(){
     return 0;
 }
 
-void addS(Node* &headNode){//adding a new student function
+    void addS(Node* &headNode){//adding a new student function
         char fname[20];
         char lname[20];
         float gpa;
@@ -113,23 +113,23 @@ void addS(Node* &headNode){//adding a new student function
             << headNode->getStudent()->getGPA() << endl;
         }   
     }
+    
     void deleteS(Node* &headNode) {//function for deleting students
         
     }
 
-
-void checknext(Node* &tempnode, int nid, Node* newnode){
-    Node* tempnode2 = tempnode->getNext();
-    if(tempnode2 == nullptr){
-        tempnode->setNext(newnode);
-        return;
+    void checknext(Node* &tempnode, int nid, Node* newnode){
+        Node* tempnode2 = tempnode->getNext();
+        if(tempnode2 == nullptr){
+            tempnode->setNext(newnode);
+            return;
+        }
+        if(tempnode2->getStudent()->getID() < nid){
+            cout << "+1" << endl;
+            checknext(tempnode2, nid, newnode);
+        }
+        else{
+            tempnode->setNext(newnode);
+            newnode->setNext(tempnode2);
+        }
     }
-    if(tempnode2->getStudent()->getID() < nid){
-        cout << "+1" << endl;
-        checknext(tempnode2, nid, newnode);
-    }
-    else{
-        tempnode->setNext(newnode);
-        newnode->setNext(tempnode2);
-    }
-}
