@@ -32,6 +32,6 @@ Student* Node::getStudent(){
   return refrencedStudent;
 }
 
-// void Node::setStudent(Student* newStudent){
-//   refrencedStudent=newStudent;
-// }
+void Node::setStudent(Student* newStudent){
+  refrencedStudent=newStudent;
+}
