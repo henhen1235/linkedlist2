@@ -17,9 +17,10 @@ using namespace std;
 void addS(Node* &headNode);//prepare the functions
 void printS(Node* &headNode);
 void deleteS(Node* &headNode);
+void checknext(Node* &tempnode, int nid, Node* currentnode);
 
 int main(){
-    Node* headNode;
+    Node* headNode = nullptr;
     char command[50];
     vector<Student*> studentslist;//create the vector of pointers
     while(true){
@@ -62,7 +63,6 @@ int main(){
 }
 
 void addS(Node* &headNode){//adding a new student function
-    cout << "hi";
         char fname[20];
         char lname[20];
         float gpa;
@@ -76,26 +76,28 @@ void addS(Node* &headNode){//adding a new student function
         cin >> gpa;
         cout << "What is the student's ID?:";
         cin >> id;
+
+
         newStudent->makestudent(fname, lname, id, gpa);
-        Node* tempnode = new Node(newStudent);
-        if (headNode == nullptr){
-            headNode = tempnode;
+        Node* newnode = new Node(newStudent);
+        
+        if (headNode == nullptr){//set as head if head doens't exist
+            cout << "adding as headnode" << endl;
+            headNode = newnode;
+        }
+        else if(headNode->getStudent()->getID() > id){
+            cout << "adding as new head node" << endl;
+            newnode->setNext(headNode);
+            headNode = newnode;
         }
         else{
-            Node* tempnode2 = headNode;
-            while(tempnode2->getNext() != nullptr){
-                tempnode2 = tempnode2->getNext();
-            }
-            tempnode2->setNext(tempnode);
+            cout << "Scanning nodes" << endl;
+            checknext(headNode, id, newnode);
         }
         cout << "Student has been added!" << endl;
     }
 
-
-
-
     void printS(Node* &headNode){//function for printing students
-        cout << "hi2";
         // int count = 1;
         // for(Student* currentstudent: studentslist){ //for each student
         //     float gpa = currentstudent->gpa;
@@ -122,4 +124,21 @@ void addS(Node* &headNode){//adding a new student function
     //     }
     //     cout << "This student doesn't exist" << endl;//if the id doesn't exist then print it out.
     // }
+}
+
+
+void checknext(Node* &tempnode, int nid, Node* newnode){
+    Node* tempnode2 = tempnode->getNext();
+    if(tempnode2 == nullptr){
+        tempnode->setNext(newnode);
+        return;
+    }
+    if(tempnode2->getStudent()->getID() < nid){
+        cout << "+1" << endl;
+        checknext(tempnode2, nid, newnode);
+    }
+    else{
+        tempnode->setNext(newnode);
+        newnode->setNext(tempnode2);
+    }
 }

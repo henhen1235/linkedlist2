@@ -8,10 +8,10 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "main.cpp",
-                "Node.cpp",
+                "Node.o",
                 "Student.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\Main.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
