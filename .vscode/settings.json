@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "iterator": "cpp",
-        "xutility": "cpp",
-        "iostream": "cpp",
-        "ios": "cpp"
-    }
-}
